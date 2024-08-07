@@ -1,0 +1,20 @@
+from django.db import models
+
+# Create your models here.
+class Employee(models.Model):
+    name = models.CharField(max_length=100)
+    position = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
+
+    def __str__(self):
+        return f"<{self.__class__.__name__}: {self.name}>"
+    
+class Hierarchy(models.Model):
+    manager = models.ForeignKey(Employee, related_name="subordinates", on_delete=models.CASCADE)
+    subordinate = models.ForeignKey(Employee, related_name="manager", on_delete=models.CASCADE)
+
+    class Meta():
+        unique_together = ['manager', 'subordinate']
+
+    def __str__(self):
+        return f"<{self.__class__.__name__}: {self.manager}->{self.subordinate}>"

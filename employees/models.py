@@ -11,10 +11,10 @@ class Employee(models.Model):
     
 class Hierarchy(models.Model):
     manager = models.ForeignKey(Employee, related_name="subordinates", on_delete=models.CASCADE)
-    subordinate = models.ForeignKey(Employee, related_name="manager", on_delete=models.CASCADE)
+    subordinate = models.ForeignKey(Employee, related_name="manager", on_delete=models.CASCADE, unique=True)
 
-    class Meta():
-        unique_together = ('manager', 'subordinate')
+    # class Meta():
+    #     unique_together = ('manager', 'subordinate')
     # class Meta:
     #     constraints = [
     #         models.UniqueConstraint(fields=['manager', 'subordinate'], name='unique_manager_subordinate')

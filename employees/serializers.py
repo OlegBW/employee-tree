@@ -9,7 +9,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'email', 'position', 'hiring_date', 'manager_id']
 
     def get_manager_id(self, obj):
-        manager_id = Hierarchy.objects.filter(subordinate = obj).values_list('id', flat=True).first()
+        manager_id = Hierarchy.objects.filter(subordinate = obj).values_list('manager_id', flat=True).first()
         return manager_id
 
 class EmployeeTreeNodeSerializer(serializers.ModelSerializer):

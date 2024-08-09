@@ -13,11 +13,17 @@ from .filters import EmployeeFilter
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
+from django.db.models import Subquery, OuterRef
 from .data import position_value, positions
 
 
 class EmployeeViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Employee.objects.all()
+    queryset = Employee.objects.all().annotate(
+        manager_id=Subquery(
+            Hierarchy.objects.filter(subordinate=OuterRef('pk')).values('manager_id')[:1]
+        )
+    )
+
     serializer_class = EmployeeSerializer
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
     filterset_class = EmployeeFilter

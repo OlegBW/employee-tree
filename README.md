@@ -59,3 +59,34 @@ This Django project implements a system for managing employees in a hierarchical
     ```
 
 - **In employees/management/commands/seed there is a variable SUBORDINATES_PER_MANAGER, the current value of 3 is defined to generate and test quickly, to generate 50k+ records, change to 5 (5^7 records)**
+
+
+# UI
+
+## Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+- **Node.js** (version 12.0 or higher)
+- **npm** (version 6.0 or higher) or **yarn** (version 1.22 or higher)
+
+## Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/OlegBW/employee-tree-client.git
+   cd employee-tree-client
+   ```
+
+2. **Install the dependencies:**
+
+   ```bash
+    npm install
+   ```
+
+3. **Running the Development Server:**
+
+   ```bash
+    npm run dev
+   ```
